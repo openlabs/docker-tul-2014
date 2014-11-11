@@ -29,15 +29,16 @@ def setup_tryton():
         "ip route | awk '/docker/ { print $NF }'"
     )
 
-    upload_template(
-        'trytond.jinja',  # local template file
-        'trytond.conf',
-        TRYTOND_CONF,
-        use_jinja=True, backup=False
-    )
+    with cd("tryton-unconference"):
+        upload_template(
+            'trytond.jinja',  # local template file
+            'trytond.conf',
+            TRYTOND_CONF,
+            use_jinja=True, backup=False
+        )
 
-    # Build docker image
-    sudo('sudo docker build --rm --no-cache -t trytond-demo .')
+        # Build docker image
+        sudo('sudo docker build --rm --no-cache -t trytond-demo .')
 
-    # Start containers in detach mode
-    sudo('docker run -d trytond-demo')
+        # Start containers in detach mode
+        sudo('docker run -d trytond-demo')
