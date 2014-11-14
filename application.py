@@ -4,7 +4,7 @@ import re
 from flask import Flask, request
 from fabric.api import local
 from flask import render_template
-from .tasks import _create_container, _create_nginx_proxy
+from tasks import _create_container, _create_nginx_proxy
 app = Flask(__name__)
 
 from docker import Client
