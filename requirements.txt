@@ -4,3 +4,4 @@ gunicorn
 gevent
 redis
 docker-py
+celery
