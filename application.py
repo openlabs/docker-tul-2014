@@ -1,3 +1,5 @@
+import re
+
 from flask import Flask, request
 from fabric.api import local
 from flask import render_template
@@ -6,6 +8,10 @@ app = Flask(__name__)
 from docker import Client
 c = Client(base_url='tcp://docker.openlabs.us:2375')
 IMAGE = 'tryton_tul_demo'
+
+
+def validate_name(name):
+    return re.match(r'^[a-zA-Z\d-]{,63}$', name)
 
 
 @app.route("/")
