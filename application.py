@@ -7,8 +7,6 @@ from flask import render_template
 from tasks import _create_container, _create_nginx_proxy, client
 app = Flask(__name__)
 
-IMAGE = 'tryton_tul_demo'
-
 
 def validate_name(name):
     if not re.match(r'^[a-zA-Z\d-]{,63}$', name):
@@ -26,8 +24,8 @@ def home():
 
     if request.method == 'POST' and validate_name(name):
         container = _create_container(name)
-        port = client.port(container['id'], 8000)
-        _create_nginx_proxy(name, port)
+        port = client.port(container['Id'], 8000)[0]
+        _create_nginx_proxy(name, port['HostPort'])
         flash('Your ERP is now setup')
         setup_done = True
 

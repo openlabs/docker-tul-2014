@@ -1,8 +1,12 @@
+from fabric.api import local
 from celery import Celery
+from flask import render_template
 from docker import Client
 
 app = Celery('tasks', broker='redis://localhost')
-client = Client(base_url='tcp://docker.openlabs.us:2375')
+client = Client(base_url='unix:///var/run/docker.sock', version='1.3')
+
+IMAGE = 'tul:2014'
 
 
 @app.task
@@ -10,12 +14,13 @@ def _create_container(name):
     """
     Create a container with the name
     """
-    container = c.create_container(
+    container = client.create_container(
         image=IMAGE,
         hostname='%s.docker.openlabs.us' % name,
         name=name
     )
     print container
+    print client.start(container.get('Id'), port_bindings={8000: None})
     return container
 
 
