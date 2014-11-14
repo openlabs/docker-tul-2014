@@ -1,6 +1,8 @@
 from celery import Celery
+from docker import Client
 
 app = Celery('tasks', broker='redis://localhost')
+client = Client(base_url='tcp://docker.openlabs.us:2375')
 
 
 @app.task
