@@ -1,0 +1,6 @@
+flask
+fabric
+gunicorn
+gevent
+redis
+docker-py
