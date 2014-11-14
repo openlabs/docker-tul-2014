@@ -25,13 +25,32 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">Project</a></li>
-          <li><a href="#">Source Code</a></li>
+          <li class="active"><a href="http://docker.openlabs.us">Home</a></li>
+          <li><a href="https://registry.hub.docker.com/u/openlabs/tryton/">Project</a></li>
+          <li><a href="https://github.com/openlabs/docker-tul-2014" target="blank">Source Code</a></li>
         </ul>
         <h3 class="text-muted">Dockerized Tryton</h3>
       </div>
 
+      {% if setup_done %}
+      <div class="jumbotron">
+        <h1>ERP is now set up</h1>
+        <p class="text-success">
+          To access your ERP you can connect with the tryton client with the following settings:
+        </p>
+        <ul class="list-group">
+          <li class="list-group-item">Host: {{ name }}.docker.openlabs.us</li>
+          <li class="list-group-item">Port: 8000</li>
+          <li class="list-group-item">User: admin</li>
+          <li class="list-group-item">Password: admin</li>
+          <li class="list-group-item">Database: test_db</li>
+        </ul>
+        <div class="alert alert-info" role="alert">
+          <strong>Heads Up!</strong>
+          <p>You can also access the web client at <a href="http://{{name}}.docker.openlabs.us:8000/" target="blank">{{name}}.docker.openlabs.us:8000</a></p>
+        </div>
+      </div>
+      {% else %}
       <div class="jumbotron">
         <h1>Launch your ERP</h1>
         <p class="lead">To launch your own instance of the
@@ -51,6 +70,7 @@
           </form>
         </p>
       </div>
+      {% endif %}
 
       <div class="footer">
         <p>&copy; Openlabs 2014</p>

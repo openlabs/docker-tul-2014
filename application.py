@@ -7,6 +7,7 @@ from flask import render_template
 from tasks import _create_container, _create_nginx_proxy, client
 app = Flask(__name__)
 
+app.secret_key = "development key"
 
 def validate_name(name):
     if not re.match(r'^[a-zA-Z\d-]{,63}$', name):
@@ -34,5 +35,4 @@ def home():
 
 if __name__ == "__main__":
     app.debug = True
-    app.secret_key = "development key"
     app.run('0.0.0.0')
