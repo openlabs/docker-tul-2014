@@ -9,6 +9,11 @@ RUN apt-get -y update
 RUN apt-get -y -q install sqlite
 
 RUN pip install "trytond_party>=3.2,<3.3"
+RUN pip install "trytond_sale>=3.2,<3.3"
+RUN pip install "trytond_purchase>=3.2,<3.3"
+
+COPY jsondata/ /opt/jsondata
+COPY trytond.conf /etc/trytond.conf
 
 RUN touch /var/lib/trytond/test_db.sqlite  # Create sqlite test_db
 RUN trytond -i all -d test_db

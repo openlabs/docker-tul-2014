@@ -16,6 +16,8 @@
     <!-- Custom styles for this template -->
     <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
 
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/pnotify/2.0.0/pnotify.all.min.css" rel="stylesheet">
+
   </head>
 
   <body>
@@ -56,9 +58,24 @@
 
     </div> <!-- /container -->
 
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/pnotify/2.0.0/pnotify.all.min.js"></script>
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript">
+      $(document).ready(function($){
+        {# Message flashin #}
+        {% for category, message in get_flashed_messages(with_categories=True) %}
+          new PNotify({
+            title: '{{ category }}',
+            text: '{{ message }}',
+            type: '{{ category }}',
+          });
+        {% endfor %}
+      });
+    </script>
   </body>
 </html>

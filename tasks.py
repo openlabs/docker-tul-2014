@@ -30,7 +30,7 @@ def _create_nginx_proxy(name, port):
     Create an nginx proxy for the given upstream
     """
     nginx_conf = render_template('nginx_conf.jinja', name=name, port=port)
-    with open('/etc/nginx/sites-enabled/%s.conf' % name, 'w') as f:
+    with open('/etc/nginx/sites-enabled/demo-%s.conf' % name, 'w') as f:
         f.write(nginx_conf)
     local('service nginx reload')
 

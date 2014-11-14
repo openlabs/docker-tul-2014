@@ -12,7 +12,7 @@ def validate_name(name):
     if not re.match(r'^[a-zA-Z\d-]{,63}$', name):
         flash("Please enter a valid domain name")
         return False
-    if os.path.exists("/etc/nginx/sites-enabled/%s.conf" % name):
+    if os.path.exists("/etc/nginx/sites-enabled/demo-%s.conf" % name):
         flash("Instance with this name is already running!")
         return False
     return True
